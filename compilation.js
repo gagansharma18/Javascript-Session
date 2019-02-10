@@ -9,11 +9,9 @@
     > Lexical Scope
     > Cheating Lexical Scope: eval
     > IIFE Pattern
-    > IIFE Pattern Questions
     > Block Scope in ES6
     > Problems with the Let Keyword
     > Dynamic Scope
-    > Quiz: Scope
     > Hoisting
     > this keyword
     > Binding confusion
@@ -81,7 +79,7 @@ NOTE : so in pass 1 no matter how many times you write var foo it will declare o
 ------------------------------------------------------------------------------------
 
 
-> Execution of code
+> Execution of code and Function Code
 
 in couple of ms we will execute the code
 
@@ -89,12 +87,11 @@ now there is no var anymore because we handel that in compilation pase
 
 
 LHS AND RHS of assignment
- x = y
+ = operator
 
 
  so foo = "bar"
- foo is LSH and "bar" is immediate value and not the reference so sting bar is RHS
-
+ foo is LSH refrence and "bar" is immediate value and not the reference  
 
 other ways for assignments to occur, which don't have an equal sign. 
 And there's still an LHS and an RHS even though we don't see a visible left hand side 
@@ -107,10 +104,113 @@ RHS is source
 also in function argument there is not = sign but still there is LHS and RHS
 
 
+note RHS reference is when we are using the value of foo varable or bar function
+
+EXECUTION CONVERSATION
+
+Line 1 after compilation there will only left foo = "bar"
+    ENGINE - hey global scope, I have an LHS reference for a variable called foo. 
+    Have you ever heard of him?
+
+    SCOPE MANAGER(Global) = Yes, I've heard of him. because you declared it just a microseconds ago
+    now Scope manager will give the reference of it to allow operation on it so we got imediate value
+
+// note if the RHS is not immediate value we need to o another lookup
+
+Line 3 after compilation
+Now we don't see the executions of the declarations of function bar and function baz anymore. 
+As a matter of fact, from an execution perspective, lines three through 10 don't exist anymore 
+because they've been declared elsewhere. But let's pretend that bar is going to get called. 
+So let's execute the function bar. We're inside of the scope of bar now, and we need to 
+execute line four. Remember, the var doesn't exist anymore. So how are we going to execute line 4?
+Everybody tell me,
+
+    ENGINE - hey scope bar, I have an LHS reference for a variable called foo. 
+    Have you ever heard of him?
+
+    SCOPE MANAGER(bar) = Yes, I've heard of him. because you declared it just a microseconds ago
+    now Scope manager will give the reference of it to allow operation on it so we got imediate value
+
+    .
+    .
+    .
+    Line 9 
+    ENGINE - hey scope baz, I have an LHS reference for a variable called bam. 
+    Have you ever heard of him?
+
+    SCOPE MANAGER(bar) = no. but I've just created it for you and here is the reference // if not in strict mode
+
+
 --------------------------------------------------------------------------------------
 
-> Execution of Function Code
-   
+ >Function Declarations, Function Expressions, and Block Scope
+
+ if the very first word in the statement is function keyword  = function declarations 
+ else its functioin expression
+
+
+ function expression is good if its not anonymous function
+ 
+ 3 bad things about anonymous function
+    - you cannot refrence it. like in recursion 
+    - helps to detect error in production code 
+    - its self descriptive
+
+ 
+    
+
+
+
+
+
+
+
+
+ ----------------------------------------------------------------------------------------
+> Lexical Scope (compile time)
+
+Compile time scope is called Lexical scope
+
+it means on complile time engine know the scope location already and it will 
+not check everytime on its upper level becaused its cached
+
+
+
+> Cheating with Lexical scope
+
+using evel function
+it will not catch lexical scope and our js will be slow
+because it will not optimise our compile time code.
+
+
+
+using with keyword
+--------------------------------------------------------------------------------------------
+>IIFE
+is it function expression or declaration?
+its function expression because first word in expression is not funcion
+
+use of IIFE is
+jQuery $ sign resolution
+pass few globals from parameters which is required inside IIFE
+
+--------------------------------------------------------------------------------------------
+> Block Scope in ES6
+Let keyword does not hoist
+---------------------------------------------------
+> Dynamic Scoping (runtime time lexical scoping)
+not exists is JS
+----------------------------------------------------------------------
+> HOISTING
+function decleration go first to top then var on compilation
+
+-----------------------------------------------------
+> this keyword
+Every function, while executing, has a reference to its current execution context, called this.
+
+
+how the function is called when its called
+
 */
 
 
