@@ -2,6 +2,7 @@
 - SCOPE 
     > Scope and the JavaScript Compiler
     > Compiling Function Scope
+    > Execution of code
     > Execution of Function Code
     > Scope and execution example
     > Function Declarations, Function Expressions, and Block Scope
@@ -24,41 +25,116 @@
 
 
 
+----------------------------------------------------------------------------------------------
+
+> Scope and the JavaScript Compiler
+    • Where to look for things (Variables and functions)
+    • Who is doing the looking 
+    • Introduce some compiler terminology (Misconception over interpreted/dynamic or complied) BASH is a interpreted language
+    • JS compile code in at least 2 PASS Through the code.
+    • Compiler is going to look for these blocks of scope
+    • The Smallest atomic unit of scope that we have is function.(Not always true)
 
 
 
+    JS COMPILER
+    //ex1.js
+    //COMPILER TERMS on pass 1
+    /*
+    on line 1 there are 2 operations going on 
+        1 declaration operation and 
+        2 initialiszation operation 
+    and there 2 operation operations actually happen at totally different time (in few microseconds)
+
+    //DECLARATION IS WHEN YOU SEE "var" or "function"
+
+    line 1
+    Engine - say, ah, I see a variable declaration for an identifier called foo. Which current scope am I in? 
+    Scope manager of current scope - And the answer to that question is you're in the global scope
+
+    Engine - Okay, I want to register the foo identifier into my current scope, which happens to be the global scope.
+
+    Now I move and completly ignore eyery thing on line 64 and dont care about the assignment value
+
+    line 3
+    Engine - I see a function declaration for an identifier called bar. Which current scope am I in? 
+    Scope manager of current scope - And the answer to that question is you're in the global scope
+    Engine - I want to register bar identifier into my current scope
+
+    but now in case of function we do care about the assignment value, Now here JS engine is fantastically complex
+    so at this point compiler do just in time also known as JIT compilation
+    which is function bar here, we don't see it being called. So rather than compiling the contents of the function bar, we'll just skip over it. And we'll come back to it 
+    later, we'll compile the function bar whenever we are forced to because it's been asked to be executed. So we'll defer the compilation and we'll compile it just in time. Even more complex than that is
 
 
 
+--------------------------------------------------------------------------------
+
+> Compiling Function Scope     
+
+    JUST IN TME EXPLAIN
+     conversation of engine and scope manager inside a function
+     and done compiling on the purpose of scope resolution
+
+NOTE : so in pass 1 no matter how many times you write var foo it will declare only once
+
+------------------------------------------------------------------------------------
 
 
+> Execution of code
+
+in couple of ms we will execute the code
+
+now there is no var anymore because we handel that in compilation pase
 
 
+LHS AND RHS of assignment
+ x = y
 
 
+ so foo = "bar"
+ foo is LSH and "bar" is immediate value and not the reference so sting bar is RHS
 
 
+other ways for assignments to occur, which don't have an equal sign. 
+And there's still an LHS and an RHS even though we don't see a visible left hand side 
+and a right hand side. So you do need to actually broaden your understanding of LHS and RHS
+
+LHS is target 
+RHS is source
 
 
+also in function argument there is not = sign but still there is LHS and RHS
 
 
+--------------------------------------------------------------------------------------
 
-
-
-
-
-• Where to look for things (Variables and functions)
-• Who is doing the looking 
-• Introduce some compiler terminology (Misconception over interpreted/dynamic or complied) BASH is a interpreted language
-• JS compile code in at let 2 PASS Through the code.
-• Compiler is going to look for these blocks of scope
-• The Smallest atomic unit of scope that we have is function.(Not always true)
-
-- Compiling function scope
-- Execution of function code
+> Execution of Function Code
+   
 */
 
-//DECELERATION IS WHEN YOU SEE "var" or "function"
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 var foo = "bar";
@@ -82,6 +158,13 @@ function baz(foo) {
 
 
 
+
+
+//RHS AND LHS reference
+
+//compiler say to scope manager "hey, [SCOPE], I have a declaration for a variable called [VARIABLE NAME], have you hered of it?
+//scope manager will reply "Yes, here is the reference for it"
+//and ignore the RHS
 
 
 
@@ -200,3 +283,26 @@ function baz(foo) {
         foo = "bam";
     }
 } 
+
+
+
+
+
+//QUIZ
+
+var foo = "bar";
+
+function bar() {
+    var foo ="baz";
+
+    function baz(foo) {
+        foo = "bam";
+        bam = "yay";
+    }
+    baz();
+}
+
+bar();
+foo;   //???
+bam;   //???
+baz(); //???
