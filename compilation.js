@@ -47,26 +47,79 @@ function baz(foo) {
 
 
 
-//pass 1 compile
+//pass 1 compilation variable decleration
+
+//---------------------------GLOBAL SCOPE-------------------------------
+        // decleration of foo variable in global scope.
+
+
+        // decleration of bar function in global scope. 
+        //-------------------BAR FUNCTION SCOPE-----------------
+    
+                // decleration of foo variable in global scope.
+
+        //------------------------------------------------------
+
+
+        // decleration of baz function in global scope.
+         //-------------------BAZ FUNCTION SCOPE-----------------
+        
+                // decleration of foo variable in global scope.
+
+        //------------------------------------------------------
+
+//----------------------------------------------------------------------
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+//pass 1 compilation in SCOPE
 
 { // global scope
     var foo;
 
-    {// socpe of bar function
+    function bar() {// socpe of bar function
             var foo;
-        
     }
 
-    {// scope of baz function
+    function baz() {// scope of baz function
         var foo;
-
     }
 }    
 
 
 
 
-//pass2 compile
+//pass2 compile in SCOPE
 
 { //Global scope
     foo = "bar";
