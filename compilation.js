@@ -211,6 +211,24 @@ Every function, while executing, has a reference to its current execution contex
 
 how the function is called when its called
 
+
+
+4 rules for "this" keyword bound in function and ordered of precedence. Call site helps to bind the "this" keyword
+
+- Default binding (foo() called all by itself) 4th precedence, this - undefined in strict mode and this - global in non Strict mode. 
+
+- Implicit building (. Reference) 3rd precedence
+
+- explicit binding ( call and apply) 2nd precedence, hard binding(.bind) if you wrap up call within a function so Everytime you call foo it will called to that bind obj only and not with the call and apply. 
+foo() //4
+foo.call(obj)//4 same result if you do hard binding 
+
+- new keyword, 1st precedence, when we add new in front of any function it will call that function with constructor call. New keyword do 4 things
+* Create brand new object
+* Link that object to another object called .prototype
+* Bind "this" to that function for the purpose of that function call.
+* If that function does not return anything it will implicitly add "return this".
+
 */
 
 
