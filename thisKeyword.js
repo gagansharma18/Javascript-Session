@@ -137,6 +137,50 @@ function foo(baz) {
 var obj = { bar: "bar" };
 foo = foo.bind2(obj);
 foo("baz"); // "bar baz"
-
-
 //Its very usefull function so its turned out that ES5 directly added this utility in Function called bind
+
+function Person(name, age){
+    this.name = name;
+    this.age = age;
+    this.getName = function(){
+        console.log(this);
+         return this.name
+         }
+    this.getAge = function(){ return this.age}
+}
+
+
+
+function Person2(name, age){
+    this.name = name;
+    this.age = age;
+    this.getName = () => { return this.name}
+    this.getAge = () => { return this.age}
+}
+
+ let p1 = new Person("gagan",30);
+ let p2 = new Person2("gagan1",301);
+
+
+console.log(p1.getName.call({name:"abcd"}));
+
+
+console.log(p2.getName.call({name:"abcd"}));
+
+
+function person(name,age) {
+   this.name = name;
+   this.getName = function(){
+        return this.name;
+    }
+    this.age = age;
+    function getAge(){
+        return this.age;
+    }
+}
+
+var person1 = new person("gagan",30);
+
+console.log(person1);
+
+
