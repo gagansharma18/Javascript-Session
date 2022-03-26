@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <script>
+            function Debounce(fn,delay){
+                let timer;
+                return function(...args){
+                    clearTimeout(timer);
+                    timer = setTimeout(fn.apply(this,args),delay);
+                }
+            }
+        </script>
+    </head>
+    <body>
+        <input id="search" type="text">
+        <div id="output"></div>
+    </body>
+    <script>
+        const searchInput = document.getElementById("search");
+        const outputDev = document.getElementById("output");
+        const DebouncedFn = Debounce(function(event){
+            console.log("event",event);
+        },250)
+        searchInput.addEventListener("keydown",DebouncedFn);
+
+    </script>
+</html>
