@@ -34,3 +34,16 @@ function sumArgsAllValue(...args1){
     return add;
 }
 console.log("4.",sumArgsAllValue(1,2,3)(1,2,3)(1).value);
+
+
+
+// with without stopper
+
+function sumArgsAllWithoutStopper(...args1){
+    function add(...args2){
+         return sumArgsAllWithoutStopper(...args1,...args2);
+     }
+     add.toString = () => args1.reduce((a,b) => a+b);
+     return add;
+ }
+ console.log("5.",sumArgsAllWithoutStopper(1,2,3)(1,2,3)(1).toString());
